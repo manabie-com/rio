@@ -8,7 +8,6 @@ import (
 
 	"github.com/manabie-com/rio/internal/config"
 	"github.com/manabie-com/rio/internal/log"
-	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -52,12 +51,14 @@ func Connect(ctx context.Context, config *config.MySQLConfig) (*gorm.DB, error) 
 	sqlDB.SetMaxIdleConns(config.MaxIdleConnections)
 	sqlDB.SetMaxOpenConns(config.MaxOpenConnections)
 
+	/* Disable tracing causes of the library conflict
 	if config.EnableTracing {
 		if err = db.WithContext(ctx).Use(otelgorm.NewPlugin(otelgorm.WithDBName(config.Schema))); err != nil {
 			log.Error(ctx, "cannot enable tracing for gorm", config.Schema)
 			return nil, err
 		}
 	}
+	*/
 
 	log.Info(ctx, "connected to database", config.Schema)
 	return db, nil
