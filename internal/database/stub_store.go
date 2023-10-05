@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/log"
 	"gorm.io/gorm"
 )
 

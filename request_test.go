@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/hungdv136/rio/internal/types"
+	"github.com/manabie-com/rio/internal/types"
 	"github.com/stretchr/testify/require"
 	"moul.io/http2curl/v2"
 )

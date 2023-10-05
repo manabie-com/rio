@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/config"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/config"
 )
 
 func TestMain(m *testing.M) {

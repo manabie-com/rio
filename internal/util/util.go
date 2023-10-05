@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/log"
 )
 
 // ToArrayString converts from array of interface{} to array of string

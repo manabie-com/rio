@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	rio "github.com/hungdv136/rio"
+	rio "github.com/manabie-com/rio"
 )
 
 // MockStubStore is a mock of StubStore interface.

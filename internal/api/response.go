@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hungdv136/rio/internal/log"
-	"github.com/hungdv136/rio/internal/types"
+	"github.com/manabie-com/rio/internal/log"
+	"github.com/manabie-com/rio/internal/types"
 )
 
 const (

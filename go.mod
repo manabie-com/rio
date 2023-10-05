@@ -1,4 +1,4 @@
-module github.com/hungdv136/rio
+module github.com/manabie-com/rio
 
 go 1.18
 

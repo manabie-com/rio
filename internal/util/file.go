@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/log"
 )
 
 // Unzip decompress a file into an output directory

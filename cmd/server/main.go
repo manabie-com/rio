@@ -4,10 +4,10 @@ import (
 	"context"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hungdv136/rio/internal/api"
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/database"
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/api"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/database"
+	"github.com/manabie-com/rio/internal/log"
 )
 
 // @title       HTTP Mock

@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 
-	"github.com/hungdv136/rio/internal/config"
-	xgrpc "github.com/hungdv136/rio/internal/grpc"
-	"github.com/hungdv136/rio/internal/setup"
+	"github.com/manabie-com/rio/internal/config"
+	xgrpc "github.com/manabie-com/rio/internal/grpc"
+	"github.com/manabie-com/rio/internal/setup"
 )
 
 func main() {

@@ -9,11 +9,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/grpc"
-	"github.com/hungdv136/rio/internal/log"
-	"github.com/hungdv136/rio/internal/types"
-	"github.com/hungdv136/rio/internal/util"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/grpc"
+	"github.com/manabie-com/rio/internal/log"
+	"github.com/manabie-com/rio/internal/types"
+	"github.com/manabie-com/rio/internal/util"
 )
 
 // StubRequestParam stub request

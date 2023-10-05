@@ -1,8 +1,8 @@
-version: '3.9'
+version: "3.9"
 
 services:
   rio-http:
-    image: hungdv136/rio:v1.2.3
+    image: manabie-com/rio:v1.2.3
     pull_policy: always
     healthcheck:
       test: curl --fail http://localhost:8896/ping || exit 1
@@ -30,11 +30,11 @@ services:
       - db
 
   rio-grpc:
-    image: hungdv136/rio:v1.2.3
+    image: manabie-com/rio:v1.2.3
     pull_policy: always
-    command: [ "./server-grpc" ]
+    command: ["./server-grpc"]
     healthcheck:
-      test: [ "CMD", "sh", "-c", "nc -z localhost 8897" ]
+      test: ["CMD", "sh", "-c", "nc -z localhost 8897"]
       interval: 10
       timeout: 30s
       retries: 10

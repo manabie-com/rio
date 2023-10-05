@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/hungdv136/rio/internal/log"
-	"github.com/hungdv136/rio/internal/util"
+	"github.com/manabie-com/rio/internal/log"
+	"github.com/manabie-com/rio/internal/util"
 )
 
 var matchingFunctions = map[OperatorName]matchingFunc{

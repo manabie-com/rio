@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/hungdv136/rio/internal/netkit"
-	"github.com/hungdv136/rio/internal/types"
+	"github.com/manabie-com/rio/internal/netkit"
+	"github.com/manabie-com/rio/internal/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -4,8 +4,8 @@ import (
 	"context"
 	"path/filepath"
 
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/database"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/database"
 )
 
 // ResetDB resets DB for testing

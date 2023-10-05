@@ -8,8 +8,8 @@ import (
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/golang-migrate/migrate/v4"
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/log"
 
 	// blank import
 	_ "github.com/golang-migrate/migrate/v4/database/mysql"

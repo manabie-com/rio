@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/types"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/types"
 	"github.com/stretchr/testify/require"
 )
 

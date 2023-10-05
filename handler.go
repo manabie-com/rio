@@ -16,8 +16,8 @@ import (
 	"time"
 
 	"github.com/PaesslerAG/jsonpath"
-	"github.com/hungdv136/rio/internal/log"
-	fs "github.com/hungdv136/rio/internal/storage"
+	"github.com/manabie-com/rio/internal/log"
+	fs "github.com/manabie-com/rio/internal/storage"
 )
 
 // Handler handles mocking for http request

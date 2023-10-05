@@ -9,7 +9,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/log"
 )
 
 // Defines request content types

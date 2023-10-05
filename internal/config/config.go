@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	fs "github.com/hungdv136/rio/internal/storage"
+	fs "github.com/manabie-com/rio/internal/storage"
 )
 
 const (

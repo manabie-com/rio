@@ -3,11 +3,11 @@ package setup
 import (
 	"context"
 
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/cache"
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/database"
-	fs "github.com/hungdv136/rio/internal/storage"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/cache"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/database"
+	fs "github.com/manabie-com/rio/internal/storage"
 )
 
 func ProvideStubStore(ctx context.Context, cfg *config.Config) (rio.StubStore, error) {

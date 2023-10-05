@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/log"
 	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

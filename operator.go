@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio/internal/log"
 )
 
 var AllSupportedOperators = []OperatorName{

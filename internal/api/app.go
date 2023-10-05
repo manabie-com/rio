@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/config"
-	"github.com/hungdv136/rio/internal/log"
-	"github.com/hungdv136/rio/internal/setup"
-	fs "github.com/hungdv136/rio/internal/storage"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/config"
+	"github.com/manabie-com/rio/internal/log"
+	"github.com/manabie-com/rio/internal/setup"
+	fs "github.com/manabie-com/rio/internal/storage"
 )
 
 type AppOption func(*App)

@@ -13,9 +13,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/hungdv136/rio/internal/log"
-	fs "github.com/hungdv136/rio/internal/storage"
-	"github.com/hungdv136/rio/internal/types"
+	"github.com/manabie-com/rio/internal/log"
+	fs "github.com/manabie-com/rio/internal/storage"
+	"github.com/manabie-com/rio/internal/types"
 )
 
 var _ json.Unmarshaler = (*Body)(nil)

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/hungdv136/rio/internal/log"
-	"github.com/hungdv136/rio/internal/util"
+	"github.com/manabie-com/rio/internal/log"
+	"github.com/manabie-com/rio/internal/util"
 )
 
 // Response is generic response structure

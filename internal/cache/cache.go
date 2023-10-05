@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/log"
 	gocache "github.com/patrickmn/go-cache"
 )
 

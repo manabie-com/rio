@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/PaesslerAG/jsonpath"
-	"github.com/hungdv136/rio"
-	"github.com/hungdv136/rio/internal/log"
+	"github.com/manabie-com/rio"
+	"github.com/manabie-com/rio/internal/log"
 	"google.golang.org/grpc/metadata"
 )
 

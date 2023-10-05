@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/hungdv136/rio/internal/log"
-	"github.com/hungdv136/rio/internal/util"
+	"github.com/manabie-com/rio/internal/log"
+	"github.com/manabie-com/rio/internal/util"
 )
 
 // Map is a map from string to interface
