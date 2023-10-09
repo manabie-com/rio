@@ -8,34 +8,23 @@ import (
 
 	"github.com/manabie-com/rio/internal/config"
 	"github.com/manabie-com/rio/internal/log"
-	"gorm.io/driver/mysql"
+
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-const (
-	mysqlOption                           = "charset=utf8&parseTime=True&loc=Local&multiStatements=True&maxAllowedPacket=0"
-	defaultMySQLConnectionLifetimeSeconds = 300
-)
-
-// Connect setups connections to MySQL database
-func Connect(ctx context.Context, config *config.MySQLConfig) (*gorm.DB, error) {
-	option := config.Option
-	if len(option) == 0 {
-		option = mysqlOption
-	}
-
-	connectionLifetimeSeconds := config.ConnectionLifetimeSeconds
-	if connectionLifetimeSeconds == 0 {
-		connectionLifetimeSeconds = defaultMySQLConnectionLifetimeSeconds
-	}
-
-	source := fmt.Sprintf("%s:%s@tcp(%s)/%s?%s", config.User, config.Password, config.Server, config.Schema, option)
+// Connect setups connections to Postgres database
+func Connect(ctx context.Context, config *config.PostgresConfig) (*gorm.DB, error) {
+	dsn := fmt.Sprintf(
+		"user='%s' password='%s' host='%s' port='%s' dbname='%s' sslmode='disable' application_name='%s'",
+		config.User, config.Password, config.Host, config.Port, config.Schema, config.User,
+	)
 	cfg := &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	}
 
-	db, err := gorm.Open(mysql.Open(source), cfg)
+	db, err := gorm.Open(postgres.Open(dsn), cfg)
 	if err != nil {
 		log.Error(ctx, "cannot connect to database", config.Schema)
 		return nil, err
@@ -47,7 +36,7 @@ func Connect(ctx context.Context, config *config.MySQLConfig) (*gorm.DB, error) 
 		return nil, err
 	}
 
-	sqlDB.SetConnMaxLifetime(time.Duration(connectionLifetimeSeconds) * time.Second)
+	sqlDB.SetConnMaxLifetime(time.Duration(20) * time.Second)
 	sqlDB.SetMaxIdleConns(config.MaxIdleConnections)
 	sqlDB.SetMaxOpenConns(config.MaxOpenConnections)
 

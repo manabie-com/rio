@@ -12,10 +12,11 @@ const (
 	dbConnectionLifetimeSeconds = 300
 	dbMaxIdleConnection         = 50
 	dbMaxOpenConnection         = 100
-	dbUser                      = "admin"
-	dbPassword                  = "password"
-	dbServer                    = "0.0.0.0:3306"
+	dbUser                      = "postgres"
+	dbPassword                  = "postgres"
 	dbSchema                    = "rio_services"
+	dbPort                      = "5432"
+	dbHost                      = "localhost"
 )
 
 const (
@@ -23,10 +24,10 @@ const (
 	serverPort = "8896"
 )
 
-// MySQLConfig contains config data to connect to MySQL database
-type MySQLConfig struct {
-	DSN                       string `json:"dsn" yaml:"dsn"`
-	Server                    string `json:"server" yaml:"server"`
+// PostgresConfig contains config data to connect to MySQL database
+type PostgresConfig struct {
+	Host                      string `json:"host" yaml:"host"`
+	Port                      string `json:"port" yaml:"port"`
 	Schema                    string `json:"schema" yaml:"schema"`
 	User                      string `json:"user" yaml:"user"`
 	Password                  string `json:"password" yaml:"password"`
@@ -42,7 +43,7 @@ type Config struct {
 	ServerAddress      string
 	FileStorageType    string
 	FileStorage        interface{}
-	DB                 *MySQLConfig
+	DB                 *PostgresConfig
 	StubCacheTTL       time.Duration
 	StubCacheStrategy  string
 	BodyStoreThreshold int
@@ -61,12 +62,13 @@ func NewConfig() *Config {
 }
 
 // NewDBConfig loads db schema config
-func NewDBConfig() *MySQLConfig {
-	return &MySQLConfig{
-		Server:                    EVString("DB_SERVER", dbServer),
+func NewDBConfig() *PostgresConfig {
+	return &PostgresConfig{
+		Host:                      EVString("DB_HOST", dbHost),
 		Schema:                    EVString("DB_SCHEMA", dbSchema),
 		User:                      EVString("DB_USER", dbUser),
 		Password:                  EVString("DB_PASSWORD", dbPassword),
+		Port:                      EVString("DB_PORT", dbPort),
 		ConnectionLifetimeSeconds: EVInt("DB_CONNECTION_LIFETIME_SECONDS", dbConnectionLifetimeSeconds),
 		MaxIdleConnections:        EVInt("DB_MAX_IDLE_CONNECTIONS", dbMaxIdleConnection),
 		MaxOpenConnections:        EVInt("DB_MAX_OPEN_CONNECTIONS", dbMaxOpenConnection),
