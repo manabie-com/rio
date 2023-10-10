@@ -14,7 +14,8 @@ const (
 	dbMaxOpenConnection         = 100
 	dbUser                      = "postgres"
 	dbPassword                  = "postgres"
-	dbName                      = "rio_services"
+	dbName                      = "postgres"
+	dbSchema                    = "public"
 	dbPort                      = "5432"
 	dbHost                      = "localhost"
 )
@@ -28,6 +29,7 @@ const (
 type PostgresConfig struct {
 	Host                      string `json:"host" yaml:"host"`
 	DBName                    string `json:"db_name" yaml:"db_name"`
+	DBSchema                  string `json:"db_schema" yaml:"db_schema"`
 	Port                      string `json:"port" yaml:"port"`
 	User                      string `json:"user" yaml:"user"`
 	Password                  string `json:"password" yaml:"password"`
@@ -66,6 +68,7 @@ func NewDBConfig() *PostgresConfig {
 	return &PostgresConfig{
 		Host:                      EVString("DB_HOST", dbHost),
 		DBName:                    EVString("DB_NAME", dbName),
+		DBSchema:                  EVString("DB_SCHEMA", dbSchema),
 		User:                      EVString("DB_USER", dbUser),
 		Password:                  EVString("DB_PASSWORD", dbPassword),
 		Port:                      EVString("DB_PORT", dbPort),

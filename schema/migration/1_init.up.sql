@@ -9,26 +9,26 @@ SET session_replication_role = replica;
 -- DROP SCHEMA IF EXISTS rio_services;
 
 -- Create the schema if it does not exist
-CREATE SCHEMA IF NOT EXISTS rio_services;
+CREATE SCHEMA IF NOT EXISTS public;
 
 -- Switch to the rio_services schema (Note: PostgreSQL does not require this step)
-SET search_path = rio_services;
+SET search_path = public;
 
 -- Table `stubs`
-CREATE TABLE IF NOT EXISTS rio_services.stubs (
+CREATE TABLE IF NOT EXISTS public.stubs (
   id BIGSERIAL PRIMARY KEY,
   namespace VARCHAR(255) NOT NULL DEFAULT '',
   request JSON,
   response JSON,
   weight INT NOT NULL DEFAULT 0,
-  active INT NOT NULL DEFAULT 0,
+  active BOOL DEFAULT FALSE,
   settings JSON,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Table `incoming_requests`
-CREATE TABLE IF NOT EXISTS rio_services.incoming_requests (
+CREATE TABLE IF NOT EXISTS public.incoming_requests (
   id BIGSERIAL PRIMARY KEY,
   namespace VARCHAR(255) NOT NULL DEFAULT '',
   url TEXT NOT NULL,

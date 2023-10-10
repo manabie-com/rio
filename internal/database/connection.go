@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"fmt"
+	"gorm.io/gorm/schema"
 	"os"
 	"time"
 
@@ -21,7 +22,8 @@ func Connect(ctx context.Context, config *config.PostgresConfig) (*gorm.DB, erro
 		config.User, config.Password, config.Host, config.Port, config.DBName, config.User,
 	)
 	cfg := &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Silent),
+		Logger:         logger.Default.LogMode(logger.Silent),
+		NamingStrategy: schema.NamingStrategy{TablePrefix: config.DBSchema + "."},
 	}
 
 	db, err := gorm.Open(postgres.Open(dsn), cfg)

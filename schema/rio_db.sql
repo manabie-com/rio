@@ -6,16 +6,16 @@
 SET session_replication_role = replica;
 
 -- Create the schema if not exists
-CREATE SCHEMA IF NOT EXISTS rio_services;
+CREATE SCHEMA IF NOT EXISTS public;
 
 -- Table `stubs`
-CREATE TABLE IF NOT EXISTS rio_services.stubs (
+CREATE TABLE IF NOT EXISTS public.stubs (
   id SERIAL PRIMARY KEY,
   namespace VARCHAR(255) NOT NULL DEFAULT '',
   request JSON,
   response JSON,
   weight INT NOT NULL DEFAULT 0,
-  active INT NOT NULL DEFAULT 0,
+  active BOOL DEFAULT FALSE,
   proxy JSON,
   settings JSON,
   description VARCHAR(511) NOT NULL DEFAULT '',
@@ -26,13 +26,13 @@ CREATE TABLE IF NOT EXISTS rio_services.stubs (
   );
 
 -- Indexes for `stubs` table
-CREATE INDEX IF NOT EXISTS idx_tag ON rio_services.stubs (tag);
-CREATE INDEX IF NOT EXISTS idx_namespace ON rio_services.stubs (namespace);
-CREATE INDEX IF NOT EXISTS idx_protocol ON rio_services.stubs (protocol);
-CREATE INDEX IF NOT EXISTS idx_updated_at ON rio_services.stubs (updated_at);
+CREATE INDEX IF NOT EXISTS idx_tag ON public.stubs (tag);
+CREATE INDEX IF NOT EXISTS idx_namespace ON public.stubs (namespace);
+CREATE INDEX IF NOT EXISTS idx_protocol ON public.stubs (protocol);
+CREATE INDEX IF NOT EXISTS idx_updated_at ON public.stubs (updated_at);
 
 -- Table `incoming_requests`
-CREATE TABLE IF NOT EXISTS rio_services.incoming_requests (
+CREATE TABLE IF NOT EXISTS public.incoming_requests (
   id SERIAL PRIMARY KEY,
   namespace VARCHAR(255) NOT NULL DEFAULT '',
   tag VARCHAR(127) DEFAULT '',
@@ -47,11 +47,11 @@ CREATE TABLE IF NOT EXISTS rio_services.incoming_requests (
   );
 
 -- Indexes for `incoming_requests` table
-CREATE INDEX IF NOT EXISTS idx_tag ON rio_services.incoming_requests (tag);
-CREATE INDEX IF NOT EXISTS idx_namespace ON rio_services.incoming_requests (namespace);
+CREATE INDEX IF NOT EXISTS idx_tag ON public.incoming_requests (tag);
+CREATE INDEX IF NOT EXISTS idx_namespace ON public.incoming_requests (namespace);
 
 -- Table `protos`
-CREATE TABLE IF NOT EXISTS rio_services.protos (
+CREATE TABLE IF NOT EXISTS public.protos (
   id SERIAL PRIMARY KEY,
   "name" VARCHAR(255) NOT NULL DEFAULT '',
   file_id VARCHAR(63) NOT NULL DEFAULT '',
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS rio_services.protos (
   );
 
 -- Index for `protos` table
-CREATE INDEX IF NOT EXISTS idx_updated_at ON rio_services.protos (updated_at);
+CREATE INDEX IF NOT EXISTS idx_updated_at ON public.protos (updated_at);
 
 -- Re-enable foreign key and unique checks
 SET session_replication_role = DEFAULT;
