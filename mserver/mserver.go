@@ -11,7 +11,7 @@ import (
 	fs "github.com/manabie-com/rio/internal/storage"
 )
 
-func StartServerWithConfig(cfg *config.Config) {
+func StartServerWithConfig(cfg *config.Config) error {
 	gin.SetMode(gin.ReleaseMode)
 	api.SetupContext()
 
@@ -19,18 +19,20 @@ func StartServerWithConfig(cfg *config.Config) {
 	app, err := api.NewApp(ctx, cfg)
 	if err != nil {
 		log.Error(ctx, err)
-		panic(err)
+		return err
 	}
 
 	dbConfig := cfg.DB
 	if err := database.Migrate(ctx, dbConfig, "schema/migration"); err != nil {
-		panic(err)
+		log.Error(ctx, err)
+		return err
 	}
 
 	if err := app.Start(ctx); err != nil {
 		log.Error(ctx, err)
-		panic(err)
+		return err
 	}
+	return nil
 }
 
 // NewConfig
