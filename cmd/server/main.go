@@ -35,3 +35,25 @@ func main() {
 		panic(err)
 	}
 }
+
+func StartWithConfig(cfg *config.Config) {
+	gin.SetMode(gin.ReleaseMode)
+	api.SetupContext()
+
+	ctx := context.Background()
+	app, err := api.NewApp(ctx, cfg)
+	if err != nil {
+		log.Error(ctx, err)
+		panic(err)
+	}
+
+	dbConfig := config.NewDBConfig()
+	if err := database.Migrate(ctx, dbConfig, "schema/migration"); err != nil {
+		panic(err)
+	}
+
+	if err := app.Start(ctx); err != nil {
+		log.Error(ctx, err)
+		panic(err)
+	}
+}

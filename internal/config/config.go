@@ -12,10 +12,12 @@ const (
 	dbConnectionLifetimeSeconds = 300
 	dbMaxIdleConnection         = 50
 	dbMaxOpenConnection         = 100
-	dbUser                      = "admin"
-	dbPassword                  = "password"
-	dbServer                    = "0.0.0.0:3306"
-	dbSchema                    = "rio_services"
+	dbUser                      = "postgres"
+	dbPassword                  = "postgres"
+	dbName                      = "postgres"
+	dbSchema                    = "public"
+	dbPort                      = "5432"
+	dbHost                      = "localhost"
 )
 
 const (
@@ -23,11 +25,12 @@ const (
 	serverPort = "8896"
 )
 
-// MySQLConfig contains config data to connect to MySQL database
-type MySQLConfig struct {
-	DSN                       string `json:"dsn" yaml:"dsn"`
-	Server                    string `json:"server" yaml:"server"`
-	Schema                    string `json:"schema" yaml:"schema"`
+// PostgresConfig contains config data to connect to MySQL database
+type PostgresConfig struct {
+	Host                      string `json:"host" yaml:"host"`
+	DBName                    string `json:"db_name" yaml:"db_name"`
+	DBSchema                  string `json:"db_schema" yaml:"db_schema"`
+	Port                      string `json:"port" yaml:"port"`
 	User                      string `json:"user" yaml:"user"`
 	Password                  string `json:"password" yaml:"password"`
 	Option                    string `json:"option" yaml:"option"`
@@ -42,7 +45,7 @@ type Config struct {
 	ServerAddress      string
 	FileStorageType    string
 	FileStorage        interface{}
-	DB                 *MySQLConfig
+	DB                 *PostgresConfig
 	StubCacheTTL       time.Duration
 	StubCacheStrategy  string
 	BodyStoreThreshold int
@@ -61,12 +64,14 @@ func NewConfig() *Config {
 }
 
 // NewDBConfig loads db schema config
-func NewDBConfig() *MySQLConfig {
-	return &MySQLConfig{
-		Server:                    EVString("DB_SERVER", dbServer),
-		Schema:                    EVString("DB_SCHEMA", dbSchema),
+func NewDBConfig() *PostgresConfig {
+	return &PostgresConfig{
+		Host:                      EVString("DB_HOST", dbHost),
+		DBName:                    EVString("DB_NAME", dbName),
+		DBSchema:                  EVString("DB_SCHEMA", dbSchema),
 		User:                      EVString("DB_USER", dbUser),
 		Password:                  EVString("DB_PASSWORD", dbPassword),
+		Port:                      EVString("DB_PORT", dbPort),
 		ConnectionLifetimeSeconds: EVInt("DB_CONNECTION_LIFETIME_SECONDS", dbConnectionLifetimeSeconds),
 		MaxIdleConnections:        EVInt("DB_MAX_IDLE_CONNECTIONS", dbMaxIdleConnection),
 		MaxOpenConnections:        EVInt("DB_MAX_OPEN_CONNECTIONS", dbMaxOpenConnection),

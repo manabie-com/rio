@@ -4,20 +4,18 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
-
-	"github.com/go-sql-driver/mysql"
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/manabie-com/rio/internal/config"
 	"github.com/manabie-com/rio/internal/log"
+	"net/url"
 
 	// blank import
-	_ "github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
-func Migrate(ctx context.Context, config *config.MySQLConfig, dir string) error {
-	connectionString := fmt.Sprintf("mysql://%s", resolveDatabaseConnectionURL(config))
+func Migrate(ctx context.Context, config *config.PostgresConfig, dir string) error {
+	connectionString := resolveDatabaseConnectionURL(config)
 	m, err := migrate.New(fmt.Sprintf("file://%s", dir), connectionString)
 	if err != nil {
 		return err
@@ -37,17 +35,15 @@ func Migrate(ctx context.Context, config *config.MySQLConfig, dir string) error 
 	return nil
 }
 
-func resolveDatabaseConnectionURL(config *config.MySQLConfig) string {
-	format := mysql.Config{
-		User:                 config.User,
-		Passwd:               config.Password,
-		Addr:                 config.Server,
-		Net:                  "tcp",
-		DBName:               config.Schema,
-		ParseTime:            true,
-		MultiStatements:      true,
-		Loc:                  time.Local,
-		AllowNativePasswords: true,
-	}
-	return format.FormatDSN()
+func resolveDatabaseConnectionURL(config *config.PostgresConfig) string {
+	dsn := fmt.Sprintf(
+		"postgresql://%s:%s@%s:%s/%s?sslmode=disable&application_name=%s",
+		url.QueryEscape(config.User),
+		url.QueryEscape(config.Password),
+		config.Host,
+		config.Port,
+		url.QueryEscape(config.DBName),
+		url.QueryEscape(config.User),
+	)
+	return dsn
 }

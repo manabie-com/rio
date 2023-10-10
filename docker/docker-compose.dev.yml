@@ -1,18 +1,15 @@
-version: '3.9'
-
 services:
-  db:
-    image: mysql:8.0.18
-    environment:
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=rio_services
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_ROOT_PASSWORD=password
-    command: "--character-set-server=utf8mb4 --max-connections=100000 --sql-mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'"
-    ports:
-      - "3306:3306"
+  postgres:
+    image: postgres
+    container_name: rio-postgres
     volumes:
-      - ./mysql:/docker-entrypoint-initdb.d
+      - ./postgres:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-rio_services}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
     tmpfs:
-      - /var/lib/mysql
+      - /var/lib/postgres

@@ -24,7 +24,7 @@ type StubDBStore struct {
 }
 
 // NewStubDBStore init a new instance for storage
-func NewStubDBStore(ctx context.Context, config *config.MySQLConfig) (*StubDBStore, error) {
+func NewStubDBStore(ctx context.Context, config *config.PostgresConfig) (*StubDBStore, error) {
 	db, err := Connect(ctx, config)
 	if err != nil {
 		log.Error(ctx, "cannot connect db", err)

@@ -43,6 +43,10 @@ type ArrayStubs struct {
 	Stubs []*Stub `json:"stubs" yaml:"stubs"`
 }
 
+func (Stub) TableName() string {
+	return "stubs"
+}
+
 // Stub defines a stub
 type Stub struct {
 	ID int64 `json:"id" yaml:"id"`

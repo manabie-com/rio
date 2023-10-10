@@ -2,8 +2,11 @@ version: "3.9"
 
 services:
   rio:
-    image: manabie-com/rio:v1.2.3
-    pull_policy: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+#    image: manabie-com/rio:v1.2.3
+#    pull_policy: always
     healthcheck:
       test: curl --fail http://localhost:8896/ping || exit 1
       interval: 15s
@@ -15,10 +18,11 @@ services:
         max-size: "10m"
         max-file: "10"
     environment:
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - DB_USER=postgres
       - DB_PASSWORD=password
-      - DB_SCHEMA=rio_services
-      - DB_SERVER=db:3306
-      - DB_USER=admin
+      - DB_NAME=rio_services
       - SERVER_PORT=8896
       - FILE_DIR=uploaded_dir
     restart: on-failure
@@ -27,23 +31,21 @@ services:
     volumes:
       - shared_data:/app/data
     depends_on:
-      - db
+      - postgres
 
   # This is for testing purpose since data are not persistent
   # You should mount data accordingly when deploying on your testing environment
-  db:
-    image: mysql:8.0.18
+  postgres:
+    image: postgres
+    container_name: rio-postgres
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
     environment:
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=rio_services
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_ROOT_PASSWORD=password
-    command: "--character-set-server=utf8mb4 --max-connections=100000 --sql-mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'"
+      - POSTGRES_DB=${POSTGRES_DB:-rio_services}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
     ports:
-      - "3306:3306"
-    tmpfs:
-      - /var/lib/mysql
-
+      - "5432:5432"
+    restart: unless-stopped
 volumes:
   shared_data:
