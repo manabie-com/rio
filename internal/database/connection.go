@@ -18,7 +18,7 @@ import (
 func Connect(ctx context.Context, config *config.PostgresConfig) (*gorm.DB, error) {
 	dsn := fmt.Sprintf(
 		"user='%s' password='%s' host='%s' port='%s' dbname='%s' sslmode='disable' application_name='%s'",
-		config.User, config.Password, config.Host, config.Port, config.Schema, config.User,
+		config.User, config.Password, config.Host, config.Port, config.DBName, config.User,
 	)
 	cfg := &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
@@ -26,13 +26,13 @@ func Connect(ctx context.Context, config *config.PostgresConfig) (*gorm.DB, erro
 
 	db, err := gorm.Open(postgres.Open(dsn), cfg)
 	if err != nil {
-		log.Error(ctx, "cannot connect to database", config.Schema)
+		log.Error(ctx, "cannot connect to database", config.DBName)
 		return nil, err
 	}
 
 	sqlDB, err := db.DB()
 	if err != nil {
-		log.Error(ctx, "cannot obtain sql database object", config.Schema)
+		log.Error(ctx, "cannot obtain sql database object", config.DBName)
 		return nil, err
 	}
 
@@ -49,7 +49,7 @@ func Connect(ctx context.Context, config *config.PostgresConfig) (*gorm.DB, erro
 	}
 	*/
 
-	log.Info(ctx, "connected to database", config.Schema)
+	log.Info(ctx, "connected to database", config.DBName)
 	return db, nil
 }
 

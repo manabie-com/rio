@@ -12,7 +12,7 @@ SET session_replication_role = replica;
 CREATE SCHEMA IF NOT EXISTS rio_services;
 
 -- Switch to the rio_services schema (Note: PostgreSQL does not require this step)
--- SET search_path = rio_services;
+SET search_path = rio_services;
 
 -- Table `stubs`
 CREATE TABLE IF NOT EXISTS rio_services.stubs (

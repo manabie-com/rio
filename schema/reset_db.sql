@@ -1,5 +1,5 @@
 -- Drop the schema if it exists
-DROP SCHEMA IF EXISTS rio_services;
+DROP SCHEMA IF EXISTS rio_services cascade;
 
 -- Create the schema if it does not exist
 CREATE SCHEMA IF NOT EXISTS rio_services;

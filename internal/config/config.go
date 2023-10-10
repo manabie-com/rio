@@ -14,7 +14,7 @@ const (
 	dbMaxOpenConnection         = 100
 	dbUser                      = "postgres"
 	dbPassword                  = "postgres"
-	dbSchema                    = "rio_services"
+	dbName                      = "rio_services"
 	dbPort                      = "5432"
 	dbHost                      = "localhost"
 )
@@ -27,8 +27,8 @@ const (
 // PostgresConfig contains config data to connect to MySQL database
 type PostgresConfig struct {
 	Host                      string `json:"host" yaml:"host"`
+	DBName                    string `json:"db_name" yaml:"db_name"`
 	Port                      string `json:"port" yaml:"port"`
-	Schema                    string `json:"schema" yaml:"schema"`
 	User                      string `json:"user" yaml:"user"`
 	Password                  string `json:"password" yaml:"password"`
 	Option                    string `json:"option" yaml:"option"`
@@ -65,7 +65,7 @@ func NewConfig() *Config {
 func NewDBConfig() *PostgresConfig {
 	return &PostgresConfig{
 		Host:                      EVString("DB_HOST", dbHost),
-		Schema:                    EVString("DB_SCHEMA", dbSchema),
+		DBName:                    EVString("DB_NAME", dbName),
 		User:                      EVString("DB_USER", dbUser),
 		Password:                  EVString("DB_PASSWORD", dbPassword),
 		Port:                      EVString("DB_PORT", dbPort),

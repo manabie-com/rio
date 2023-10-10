@@ -42,7 +42,7 @@ func resolveDatabaseConnectionURL(config *config.PostgresConfig) string {
 		url.QueryEscape(config.Password),
 		config.Host,
 		config.Port,
-		url.QueryEscape(config.Schema),
+		url.QueryEscape(config.DBName),
 		url.QueryEscape(config.User),
 	)
 	return dsn

@@ -88,6 +88,10 @@ type IncomingRequests struct {
 	Requests []*IncomingRequest `json:"requests" yaml:"requests"`
 }
 
+func (IncomingRequest) TableName() string {
+	return "incoming_requests"
+}
+
 // IncomingRequest capture the incoming request
 type IncomingRequest struct {
 	ID        int64     `json:"id" yaml:"id"`

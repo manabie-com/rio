@@ -22,7 +22,7 @@ services:
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=password
-      - DB_SCHEMA=rio_services
+      - DB_NAME=rio_services
       - SERVER_PORT=8896
       - FILE_DIR=uploaded_dir
     restart: on-failure
