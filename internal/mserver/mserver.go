@@ -1,4 +1,4 @@
-package main
+package mserver
 
 import (
 	"context"
@@ -10,16 +10,12 @@ import (
 	"github.com/manabie-com/rio/internal/log"
 )
 
-// @title       HTTP Mock
-// @description A mock framework for unit test http in golang, also support integration test
-// @version     1.0
-// @BasePath    /api/v1
-func main() {
+func StartServerWithConfig(cfg *config.Config) {
 	gin.SetMode(gin.ReleaseMode)
 	api.SetupContext()
 
 	ctx := context.Background()
-	app, err := api.NewApp(ctx, config.NewConfig())
+	app, err := api.NewApp(ctx, cfg)
 	if err != nil {
 		log.Error(ctx, err)
 		panic(err)
