@@ -104,3 +104,27 @@ func SetupContext() {
 		return defaultFunc(ctx)
 	}
 }
+
+// NewApp returns new app with memory stub instead of using database
+func NewInMemoryApp(ctx context.Context, config *config.Config, options ...AppOption) (*App, error) {
+	stubStore := rio.NewStubMemory()
+
+	fileStorage, err := setup.ProvideFileStorage(ctx, config)
+	if err != nil {
+		return nil, err
+	}
+
+	app := &App{
+		config:      config,
+		stubStore:   stubStore,
+		fileStorage: fileStorage,
+		kit:         gin.New(),
+	}
+
+	for _, optionFunc := range options {
+		optionFunc(app)
+	}
+
+	app.setup()
+	return app, nil
+}
