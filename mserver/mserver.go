@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/manabie-com/rio/internal/api"
+	"github.com/manabie-com/rio/internal/config"
 	"github.com/manabie-com/rio/internal/log"
 )
 
@@ -13,7 +14,7 @@ func StartInMemoryServer() error {
 	api.SetupContext()
 
 	ctx := context.Background()
-	app, err := api.NewInMemoryApp(ctx, nil)
+	app, err := api.NewInMemoryApp(ctx, config.NewConfig())
 	if err != nil {
 		log.Error(ctx, err)
 		return err
