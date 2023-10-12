@@ -38,6 +38,10 @@ type RequestMatching struct {
 }
 
 func (r *RequestMatching) Validate(ctx context.Context) error {
+	if len(r.URL) == 0 {
+		return fmt.Errorf("URL operators can not be empty")
+	}
+
 	if err := validateOp(ctx, r.URL...); err != nil {
 		return err
 	}
