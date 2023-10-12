@@ -3,6 +3,7 @@ package rio
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/manabie-com/rio/internal/log"
 )
@@ -254,4 +255,16 @@ func validateBodyOps(ctx context.Context, ops ...BodyOperator) error {
 	}
 
 	return nil
+}
+
+// OpUrlEqualTo
+// Give an Operator that url is prefixed with echo for client binding
+// eg: /api/get_token => /echo/api/get_token
+// slash prefix is automatically added
+func OpUrlEqualTo(actualURL string) Operator {
+	actualURL, _ = strings.CutPrefix(actualURL, "/")
+	return Operator{
+		Name:  OpEqualTo,
+		Value: fmt.Sprintf("/echo/%s", actualURL),
+	}
 }
